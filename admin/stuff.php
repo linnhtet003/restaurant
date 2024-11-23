@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slider List</title>
+    <title>Stuff List</title>
 </head>
 <body>
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Title</th>
-                <th>Description</th>
+                <th>Name</th>
+                <th>Position</th>
                 <th>Image</th>
             </tr>
         </thead>
@@ -20,18 +20,18 @@
     <?php
         error_reporting(1);
         include ('connection.php');
-        $data = "SELECT * FROM slider ORDER by id DESC";
+        $data = "SELECT * FROM stuff ORDER by id DESC";
         $val = $con->query($data);
         $i = 1;
         if ($val->num_rows > 0) {
-        while (list($id, $title, $description, $image) = mysqli_fetch_array($val)) {
+        while (list($id, $name, $position, $image) = mysqli_fetch_array($val)) {
             echo "<tr>
                 <td>".$i++."</td>
-                <td> $title </td>
-                <td> $description </td>
-                <td> <img src='./slider/$image' height='100' width='100' style='border-radius: 20px;' /> </td>
-                <td> <a href='slider-edit.php?id=$id'> Edit </a> </td>
-                <td> <a href='slider-delete.php?id=$id&image=$image'> Delete </a> </td>
+                <td> $name </td>
+                <td> $position </td>
+                <td> <img src='./stuff/$image' height='100' width='100' style='border-radius: 20px;' /> </td>
+                <td> <a href='stuff-edit.php?id=$id'> Edit </a> </td>
+                <td> <a href='stuff-delete.php?id=$id&image=$image'> Delete </a> </td>
                 </tr>";
             }
         } else {

@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slider List</title>
+    <title>Review List</title>
 </head>
 <body>
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Image</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>About</th>
+                <th>Review</th>
             </tr>
         </thead>
         <tbody>
@@ -20,18 +21,18 @@
     <?php
         error_reporting(1);
         include ('connection.php');
-        $data = "SELECT * FROM slider ORDER by id DESC";
+        $data = "SELECT * FROM contact ORDER by id DESC";
         $val = $con->query($data);
         $i = 1;
         if ($val->num_rows > 0) {
-        while (list($id, $title, $description, $image) = mysqli_fetch_array($val)) {
+        while (list($id, $name, $email,$about, $review) = mysqli_fetch_array($val)) {
             echo "<tr>
                 <td>".$i++."</td>
-                <td> $title </td>
-                <td> $description </td>
-                <td> <img src='./slider/$image' height='100' width='100' style='border-radius: 20px;' /> </td>
-                <td> <a href='slider-edit.php?id=$id'> Edit </a> </td>
-                <td> <a href='slider-delete.php?id=$id&image=$image'> Delete </a> </td>
+                <td> $name </td>
+                <td> $email </td>
+                <td> $about </td>
+                <td> $review </td>
+                <td> <a href='review-delete.php?id=$id'> Delete </a> </td>
                 </tr>";
             }
         } else {

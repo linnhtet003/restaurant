@@ -85,7 +85,7 @@
 			while(list($id, $title, $description, $image) = mysqli_fetch_array($val)) {
 
 		echo "<li class='text-center'>
-				<img src='admin/image/$image' alt='$title'>
+				<img src='admin/slider/$image' alt='$title'>
 				<div class='container'>
 					<div class='row'>
 						<div class='col-md-12'>
@@ -120,9 +120,9 @@
 				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
 					<div class="inner-column">
 						<h1>Welcome To <span>Yamifood Restaurant</span></h1>
-						<h4>Little Story</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante sodales augue, eget lacinia lectus erat et sem. </p>
-						<p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. Sed aliquam metus lorem, a pellentesque tellus pretium a. Nulla placerat elit in justo vestibulum, et maximus sem pulvinar.</p>
+						<h4>Our Story</h4>
+						<p>At YamiFood, we blend passion and flavor to create unforgettable dining experiences. Every dish tells a story of love, tradition, and quality. Our journey began with a vision to bring people together over authentic, handcrafted meals. </p>
+						<p>From the freshest ingredients to masterful techniques, we strive to deliver excellence in every bite. Join us for a culinary adventure that satisfies your cravings and warms your heart. </p>
 						<a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Reservation</a>
 					</div>
 				</div>
@@ -153,7 +153,7 @@
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
 						<h2>Special Menu</h2>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+						<p>Delight in our carefully curated dishes, crafted to elevate your dining experience.</p>
 					</div>
 				</div>
 			</div>
@@ -171,38 +171,30 @@
 			</div>
 				
 			<div class="row special-list">
-				<div class="col-lg-4 col-md-6 special-grid drinks">
-					<div class="gallery-single fix">
-						<img src="images/img-01.jpg" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Drinks 1</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $7.79</h5>
+
+<?php
+		error_reporting(1);
+		include('connection.php');
+		$data = "SELECT * FROM drinks ORDER by id DESC";
+		$val = $con->query($data);
+		if($val->num_rows > 0) {
+			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
+
+		echo "<div class='col-lg-4 col-md-6 special-grid drinks'>
+					<div class='gallery-single fix'>
+						<img src='admin/drink/$image' class='img-fluid' alt='$name'>
+						<div class='why-text'>
+							<h4> $name </h4>
+							<p> $description </p>
+							<h5> $price MMK</h5>
 						</div>
 					</div>
-				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid drinks">
-					<div class="gallery-single fix">
-						<img src="images/img-02.jpg" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Drinks 2</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 col-md-6 special-grid drinks">
-					<div class="gallery-single fix">
-						<img src="images/img-03.jpg" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Drinks 3</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $10.79</h5>
-						</div>
-					</div>
-				</div>
+				</div>";
+			}
+		} else {
+		echo "<h1 style='text-align: center;'><b> No data available</b></h1>"; 
+		}
+?>
 				
 				<div class="col-lg-4 col-md-6 special-grid lunch">
 					<div class="gallery-single fix">
