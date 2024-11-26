@@ -46,12 +46,12 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="menu.php">Menu</a></li>
 						<li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>
 						<li class="nav-item"><a class="nav-link" href="reservation.php">Reservation</a></li>
 						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-						<li class="nav-item"><a class="nav-link" href="stuff.php">Stuff</a></li>
+						<li class="nav-item active"><a class="nav-link" href="stuff.php">Stuff</a></li>
 						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 					</ul>
 				</div>
@@ -60,259 +60,63 @@
 	</header>
 	<!-- End header -->
 	
-	<!-- Start slides -->
-	<div id="slides" class="cover-slides">
-		<ul class="slides-container">
+	<!-- Start All Pages -->
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>Stuff</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End All Pages -->
+	
+	<!-- Start Stuff -->
+	<div class="stuff-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>Stuff</h2>
+						<p>Meet the passionate team behind YamiFood. Dedicated chefs, attentive servers, and welcoming staff ensure every dining experience is unforgettable.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
 
 	<?php
 		error_reporting(1);
 		include('connection.php');
-		$data = "SELECT * FROM slider ORDER by id DESC";
+		$data = "SELECT * FROM stuff ORDER by id DESC";
 		$val = $con->query($data);
 		if($val->num_rows > 0) {
-			while(list($id, $title, $description, $image) = mysqli_fetch_array($val)) {
+			while(list($id, $name, $position, $image) = mysqli_fetch_array($val)) {
 
-		echo "<li class='text-center'>
-				<img src='admin/slider/$image' alt='$title'>
-				<div class='container'>
-					<div class='row'>
-						<div class='col-md-12'>
-							<h1 class='m-b-20'><strong> $title </strong></h1>
-							<p class='m-b-40'> $description </p>
-							<p><a class='btn btn-lg btn-circle btn-outline-new-white' href='reservation.php'>Reservation</a></p>
+		echo "<div class='col-md-4 col-sm-6'>
+					<div class='our-team'>
+						<img src='admin/stuff/$image' alt=' $name '>
+						<div class='team-content'>
+							<h3 class='title'> $name </h3>
+							<span class='post'> $position </span>
+							<ul class='social'>
+								<li><a href='#'><i class='fa fa-facebook-f'></i></a></li>
+								<li><a href='#'><i class='fa fa-twitter'></i></a></li>
+								<li><a href='#'><i class='fa fa-google-plus'></i></a></li>
+							</ul>
 						</div>
 					</div>
-				</div>
-			</li>";
+				</div>";
 			}
 		} else {
 		echo "<h1 style='text-align: center;'><b> No data available</b></h1>"; 
 		}
 	?>
 
-		</ul>
-		<div class="slides-navigation">
-			<a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-			<a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-		</div>
-	</div>
-	<!-- End slides -->
-	
-	<!-- Start About -->
-	<div class="about-section-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12">
-					<img src="images/about-img.jpg" alt="" class="img-fluid">
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
-					<div class="inner-column">
-						<h1>Welcome To <span>Yamifood Restaurant</span></h1>
-						<h4>Our Story</h4>
-						<p>At YamiFood, we blend passion and flavor to create unforgettable dining experiences. Every dish tells a story of love, tradition, and quality. Our journey began with a vision to bring people together over authentic, handcrafted meals. </p>
-						<p>From the freshest ingredients to masterful techniques, we strive to deliver excellence in every bite. Join us for a culinary adventure that satisfies your cravings and warms your heart. </p>
-						<a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Reservation</a>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End About -->
-	
-	<!-- Start QT -->
-	<div class="qt-box qt-background">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 ml-auto mr-auto text-left">
-					<p class="lead ">
-						" If you're not the one cooking, stay out of the way and compliment the chef. "
-					</p>
-					<span class="lead">Michael Strahan</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End QT -->
-	
-	<!-- Start Menu -->
-	<div class="menu-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						<h2>Special Menu</h2>
-						<p>Delight in our carefully curated dishes, crafted to elevate your dining experience.</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="special-menu text-center">
-						<div class="button-group filter-button-group">
-							<button class="active" data-filter="*">All</button>
-							<button data-filter=".drinks">Drinks</button>
-							<button data-filter=".lunch">Lunch</button>
-							<button data-filter=".dinner">Dinner</button>
-						</div>
-					</div>
-				</div>
-			</div>
-				
-			<div class="row special-list">
-
-<?php
-		error_reporting(1);
-		include('connection.php');
-		$data = "SELECT * FROM drinks ORDER by id DESC LIMIT 3";
-		$val = $con->query($data);
-		if($val->num_rows > 0) {
-			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
-
-		echo "<div class='col-lg-4 col-md-6 special-grid drinks'>
-					<div class='gallery-single fix'>
-						<img src='admin/drink/$image' class='img-fluid' alt='$name'>
-						<div class='why-text'>
-							<h4> $name </h4>
-							<p> $description </p>
-							<h5> $price MMK</h5>
-						</div>
-					</div>
-				</div>";
-			}
-		} else {
-		echo "<h1 style='text-align: center;'><b> No data available</b></h1>";
-		}
-?>
-
-<?php
-		error_reporting(1);
-		include('connection.php');
-		$data = "SELECT * FROM lunch ORDER by id DESC LIMIT 3";
-		$val = $con->query($data);
-		if($val->num_rows > 0) {
-			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
-
-		echo "<div class='col-lg-4 col-md-6 special-grid lunch'>
-					<div class='gallery-single fix'>
-						<img src='admin/lunch/$image' class='img-fluid' alt='$name'>
-						<div class='why-text'>
-							<h4> $name </h4>
-							<p> $description </p>
-							<h5> $price MMK </h5>
-						</div>
-					</div>
-				</div>";
-			}
-		} else {
-		echo "<h1 style='text-align: center;'><b> No data available</b></h1>";
-		}
-?>
-
-<?php
-		error_reporting(1);
-		include('connection.php');
-		$data = "SELECT * FROM dinner ORDER by id DESC LIMIT 3";
-		$val = $con->query($data);
-		if($val->num_rows > 0) {
-			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
-
-		echo "<div class='col-lg-4 col-md-6 special-grid dinner'>
-					<div class='gallery-single fix'>
-						<img src='admin/dinner/$image' class='img-fluid' alt='Image'>
-						<div class='why-text'>
-							<h4> $name </h4>
-							<p> $description </p>
-							<h5> $price </h5>
-						</div>
-					</div>
-				</div>";
-			}
-		} else {
-		echo "<h1 style='text-align: center;'><b> No data available</b></h1>";
-		}
-?>
-
-			</div>
-		</div>
-	</div>
-	<!-- End Menu -->
-
-	<!-- Start Gallery -->
-	<div class="gallery-box">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						<h2>Our Culinary Journey</h2>
-						<p>Explore our vibrant selection of dishes that showcase the essence of Yamifood. 
-							Each image tells a story of flavor, creativity, and passion for culinary art. 
-							From our handcrafted appetizers to delectable desserts, take a visual journey through the heart of our restaurant. 
-							We invite you to savor the experience of dining with us, one dish at a time.</p>
-					</div>
-				</div>
-			</div>
-			<div class="tz-gallery">
-				<div class="row">
-
-				<?php
-error_reporting(1);
-include('connection.php');
-
-$tables = [
-    'drinks' => 'drink',
-    'lunch' => 'lunch',
-    'dinner' => 'dinner'
-];
-
-$items = [];
-
-foreach ($tables as $table => $folder) {
-    $data = "SELECT * FROM $table ORDER BY id DESC LIMIT 2";
-    $val = $con->query($data);
-
-    if (!$val) {
-        die("Query failed for $table: " . $con->error);
-    }
-
-    if ($val->num_rows > 0) {
-        while ($row = mysqli_fetch_assoc($val)) {
-            $row['folder'] = $folder;
-            $items[] = $row;
-        }
-    } else {
-        echo "<h1 style='text-align: center;'><b>No data available for $table</b></h1>";
-    }
-}
-
-if (!empty($items)) {
-    foreach ($items as $item) {
-        $id = $item['id'];
-        $name = $item['name'];
-        $description = $item['description'];
-        $price = $item['price'];
-        $image = $item['img'];
-        $folder = $item['folder'];
-
-        $largeImagePath = "admin/{$folder}/$image";
-
-        echo "<div class='col-sm-12 col-md-4 col-lg-4'>
-                <a class='lightbox' href='$largeImagePath'>
-                    <img class='img-fluid' src='$largeImagePath' alt='$name'>
-                </a>
-            </div>";
-    }
-} else {
-    echo "<h1 style='text-align:center;'><b>No data available</b></h1>";
-}
-?>
-
-
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Gallery -->
+	<!-- End Stuff -->
 
 	<!-- Start Customer Reviews -->
 	<div class="customer-reviews-box">

@@ -46,11 +46,11 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="menu.php">Menu</a></li>
 						<li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>
 						<li class="nav-item"><a class="nav-link" href="reservation.php">Reservation</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+						<li class="nav-item active"><a class="nav-link" href="about.php">About</a></li>
 						<li class="nav-item"><a class="nav-link" href="stuff.php">Stuff</a></li>
 						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 					</ul>
@@ -60,53 +60,27 @@
 	</header>
 	<!-- End header -->
 	
-	<!-- Start slides -->
-	<div id="slides" class="cover-slides">
-		<ul class="slides-container">
-
-	<?php
-		error_reporting(1);
-		include('connection.php');
-		$data = "SELECT * FROM slider ORDER by id DESC";
-		$val = $con->query($data);
-		if($val->num_rows > 0) {
-			while(list($id, $title, $description, $image) = mysqli_fetch_array($val)) {
-
-		echo "<li class='text-center'>
-				<img src='admin/slider/$image' alt='$title'>
-				<div class='container'>
-					<div class='row'>
-						<div class='col-md-12'>
-							<h1 class='m-b-20'><strong> $title </strong></h1>
-							<p class='m-b-40'> $description </p>
-							<p><a class='btn btn-lg btn-circle btn-outline-new-white' href='reservation.php'>Reservation</a></p>
-						</div>
-					</div>
+	<!-- Start header -->
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>About Us</h1>
 				</div>
-			</li>";
-			}
-		} else {
-		echo "<h1 style='text-align: center;'><b> No data available</b></h1>"; 
-		}
-	?>
-
-		</ul>
-		<div class="slides-navigation">
-			<a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-			<a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+			</div>
 		</div>
 	</div>
-	<!-- End slides -->
+	<!-- End header -->
 	
 	<!-- Start About -->
 	<div class="about-section-box">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="col-lg-6 col-md-6">
 					<img src="images/about-img.jpg" alt="" class="img-fluid">
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
-					<div class="inner-column">
+				<div class="col-lg-6 col-md-6 text-center">
+				<div class="inner-column">
 						<h1>Welcome To <span>Yamifood Restaurant</span></h1>
 						<h4>Our Story</h4>
 						<p>At YamiFood, we blend passion and flavor to create unforgettable dining experiences. Every dish tells a story of love, tradition, and quality. Our journey began with a vision to bring people together over authentic, handcrafted meals. </p>
@@ -114,25 +88,18 @@
 						<a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Reservation</a>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End About -->
-	
-	<!-- Start QT -->
-	<div class="qt-box qt-background">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 ml-auto mr-auto text-left">
-					<p class="lead ">
-						" If you're not the one cooking, stay out of the way and compliment the chef. "
-					</p>
-					<span class="lead">Michael Strahan</span>
+				<div class="col-md-12">
+					<div class="inner-pt">
+						<p>At YamiFood, every moment spent with us is crafted to bring joy and connection. Whether you're here for a quick lunch, a romantic dinner, or a celebration with loved ones, we aim to make every visit memorable. </p>
+						<p>Our chefs pour their hearts into creating dishes that honor tradition while embracing innovation. From sizzling grills to fresh, vibrant salads, each plate is a masterpiece of taste and texture. </p>
+						<p>We believe food is more than nourishment; it's an expression of care, a symbol of togetherness, and a celebration of life. Our restaurant isn't just a place to eat; it's a haven where flavors bring people closer, conversations flow, and happiness is shared </p>
+						<p>Step into YamiFood and embark on a journey where every bite carries the essence of our passion. Welcome to a world where food tells a story, and you’re always the heart of it. </p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End QT -->
+	<!-- End About -->
 	
 	<!-- Start Menu -->
 	<div class="menu-box">
@@ -163,7 +130,7 @@
 <?php
 		error_reporting(1);
 		include('connection.php');
-		$data = "SELECT * FROM drinks ORDER by id DESC LIMIT 3";
+		$data = "SELECT * FROM drinks ORDER by id DESC LIMIT 2";
 		$val = $con->query($data);
 		if($val->num_rows > 0) {
 			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
@@ -187,7 +154,7 @@
 <?php
 		error_reporting(1);
 		include('connection.php');
-		$data = "SELECT * FROM lunch ORDER by id DESC LIMIT 3";
+		$data = "SELECT * FROM lunch ORDER by id DESC LIMIT 2";
 		$val = $con->query($data);
 		if($val->num_rows > 0) {
 			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
@@ -211,7 +178,7 @@
 <?php
 		error_reporting(1);
 		include('connection.php');
-		$data = "SELECT * FROM dinner ORDER by id DESC LIMIT 3";
+		$data = "SELECT * FROM dinner ORDER by id DESC LIMIT 2";
 		$val = $con->query($data);
 		if($val->num_rows > 0) {
 			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
@@ -236,137 +203,6 @@
 		</div>
 	</div>
 	<!-- End Menu -->
-
-	<!-- Start Gallery -->
-	<div class="gallery-box">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						<h2>Our Culinary Journey</h2>
-						<p>Explore our vibrant selection of dishes that showcase the essence of Yamifood. 
-							Each image tells a story of flavor, creativity, and passion for culinary art. 
-							From our handcrafted appetizers to delectable desserts, take a visual journey through the heart of our restaurant. 
-							We invite you to savor the experience of dining with us, one dish at a time.</p>
-					</div>
-				</div>
-			</div>
-			<div class="tz-gallery">
-				<div class="row">
-
-				<?php
-error_reporting(1);
-include('connection.php');
-
-$tables = [
-    'drinks' => 'drink',
-    'lunch' => 'lunch',
-    'dinner' => 'dinner'
-];
-
-$items = [];
-
-foreach ($tables as $table => $folder) {
-    $data = "SELECT * FROM $table ORDER BY id DESC LIMIT 2";
-    $val = $con->query($data);
-
-    if (!$val) {
-        die("Query failed for $table: " . $con->error);
-    }
-
-    if ($val->num_rows > 0) {
-        while ($row = mysqli_fetch_assoc($val)) {
-            $row['folder'] = $folder;
-            $items[] = $row;
-        }
-    } else {
-        echo "<h1 style='text-align: center;'><b>No data available for $table</b></h1>";
-    }
-}
-
-if (!empty($items)) {
-    foreach ($items as $item) {
-        $id = $item['id'];
-        $name = $item['name'];
-        $description = $item['description'];
-        $price = $item['price'];
-        $image = $item['img'];
-        $folder = $item['folder'];
-
-        $largeImagePath = "admin/{$folder}/$image";
-
-        echo "<div class='col-sm-12 col-md-4 col-lg-4'>
-                <a class='lightbox' href='$largeImagePath'>
-                    <img class='img-fluid' src='$largeImagePath' alt='$name'>
-                </a>
-            </div>";
-    }
-} else {
-    echo "<h1 style='text-align:center;'><b>No data available</b></h1>";
-}
-?>
-
-
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Gallery -->
-
-	<!-- Start Customer Reviews -->
-	<div class="customer-reviews-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						<h2>Customer Reviews</h2>
-						<p>Your feedback matters! See how others have enjoyed their experience with us.</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8 mr-auto ml-auto text-center">
-					<div id="reviews" class="carousel slide" data-ride="carousel">
-						<div class="carousel-inner mt-4">
-
-				<?php
-					error_reporting(1);
-					include('connection.php');
-					$data = "SELECT * FROM contact ORDER by id DESC LIMIT 3";
-					$val = $con->query($data);
-					$active = false;
-					if($val->num_rows > 0) {
-						while(list($id, $name, $email, $person, $message) = mysqli_fetch_array($val)) {
-							$activeok = $active ? '' : 'active';
-							$active = true;
-						echo "<div class='carousel-item text-center $activeok'>
-								<h5 class='mt-4 mb-0'><strong class='text-warning text-uppercase'> $name </strong></h5>
-								<h4 class='text-dark m-0'><strong> $email </strong></h4>
-								<h4 class='text-dark m-0'> $person </h4>
-								<p class='m-0 pt-3'> $message </p>
-							</div>";
-						}
-					} else {
-						echo "<h1 style='text-align: center;'><b> No data available</b></h1>";
-					}
-				?>
-
-						</div>
-						<a class="carousel-control-prev" href="#reviews" role="button" data-slide="prev">
-							<i class="fa fa-angle-left" aria-hidden="true"></i>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#reviews" role="button" data-slide="next">
-							<i class="fa fa-angle-right" aria-hidden="true"></i>
-							<span class="sr-only">Next</span>
-						</a>
-                    </div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Customer Reviews -->
 
 	<!-- Start Contact info -->
 	<div class="contact-imfo-box">
