@@ -97,7 +97,7 @@
 		</div>
 	</div>
 	<!-- End slides -->
-	
+
 	<!-- Start About -->
 	<div class="about-section-box">
 		<div class="container">
@@ -118,7 +118,7 @@
 		</div>
 	</div>
 	<!-- End About -->
-	
+
 	<!-- Start QT -->
 	<div class="qt-box qt-background">
 		<div class="container">
@@ -133,7 +133,7 @@
 		</div>
 	</div>
 	<!-- End QT -->
-	
+
 	<!-- Start Menu -->
 	<div class="menu-box">
 		<div class="container">
@@ -168,7 +168,7 @@
 		if($val->num_rows > 0) {
 			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
 
-		echo "<div class='col-lg-4 col-md-6 special-grid drinks'>
+		echo "<a href='reservation.php'><div class='col-lg-4 col-md-6 special-grid drinks'>
 					<div class='gallery-single fix'>
 						<img src='admin/drink/$image' class='img-fluid' alt='$name'>
 						<div class='why-text'>
@@ -177,7 +177,7 @@
 							<h5> $price MMK</h5>
 						</div>
 					</div>
-				</div>";
+				</div></a>";
 			}
 		} else {
 		echo "<h1 style='text-align: center;'><b> No data available</b></h1>";
@@ -192,7 +192,7 @@
 		if($val->num_rows > 0) {
 			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
 
-		echo "<div class='col-lg-4 col-md-6 special-grid lunch'>
+		echo "<a href='reservation.php'><div class='col-lg-4 col-md-6 special-grid lunch'>
 					<div class='gallery-single fix'>
 						<img src='admin/lunch/$image' class='img-fluid' alt='$name'>
 						<div class='why-text'>
@@ -201,7 +201,7 @@
 							<h5> $price MMK </h5>
 						</div>
 					</div>
-				</div>";
+				</div></a>";
 			}
 		} else {
 		echo "<h1 style='text-align: center;'><b> No data available</b></h1>";
@@ -216,7 +216,7 @@
 		if($val->num_rows > 0) {
 			while(list($id, $name, $description, $price, $image) = mysqli_fetch_array($val)) {
 
-		echo "<div class='col-lg-4 col-md-6 special-grid dinner'>
+		echo "<a href='reservation.php'><div class='col-lg-4 col-md-6 special-grid dinner'>
 					<div class='gallery-single fix'>
 						<img src='admin/dinner/$image' class='img-fluid' alt='Image'>
 						<div class='why-text'>
@@ -225,7 +225,7 @@
 							<h5> $price </h5>
 						</div>
 					</div>
-				</div>";
+				</div></a>";
 			}
 		} else {
 		echo "<h1 style='text-align: center;'><b> No data available</b></h1>";
