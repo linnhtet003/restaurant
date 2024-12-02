@@ -73,17 +73,41 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                    <li>
+                        <a href="base.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">UI elements</li><!-- /.menu-title -->
 
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-house"></i>slider</a>
+                    <li class="menu-item-has-children active dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-repeat"></i>Slider</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="slider.php">Slider List</a></li>
-                            <li><i class="fa-solid fa-circle-plus"></i><a href="slider-create.php">Slider Create</a></li>
+                            <li><i class="fa-solid fa-plus"></i><a href="slider-create.php">Slider Create</a></li>
                         </ul>
+
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-martini-glass-citrus"></i>Drink</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="drink.php">Drink List</a></li>
+                            <li><i class="fa-solid fa-plus"></i><a href="drink-create.php">Drink Create</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-burger"></i>Lunch</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="lunch.php">Lunch List</a></li>
+                            <li><i class="fa-solid fa-plus"></i><a href="lunch-create.php">Lunch Create</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-utensils"></i>Dinner</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="dinner.php">Dinner List</a></li>
+                            <li><i class="fa-solid fa-plus"></i><a href="dinner-create.php">Dinner Create</a></li>
+                        </ul>
+                    </li>
 
                     <li class="menu-title">Extras</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">

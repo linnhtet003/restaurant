@@ -73,19 +73,19 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li class="active">
                         <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">UI elements</li><!-- /.menu-title -->
 
-                    <li class="menu-item-has-children active dropdown">
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-repeat"></i>Slider</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="slider.php">Slider List</a></li>
                             <li><i class="fa-solid fa-plus"></i><a href="slider-create.php">Slider Create</a></li>
                         </ul>
 
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children active dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-martini-glass-citrus"></i>Drink</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="drink.php">Drink List</a></li>
@@ -246,8 +246,8 @@
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="base.php">Dashboard</a></li>
-                                    <li><a href="slider.php">Slider</a></li>
-                                    <li class="active">Slider List</li>
+                                    <li><a href="drink.php">Drink</a></li>
+                                    <li class="active">Drink Create</li>
                                 </ol>
                             </div>
                         </div>
@@ -261,46 +261,56 @@
                 <div class="row">
                 <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Slider List</strong>
+                            <div class="text-center card-header">
+                                <strong>Drink</strong> Create
                             </div>
-                            <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                          <th scope="col">No</th>
-                                          <th scope="col">Title</th>
-                                          <th scope="col">Description</th>
-                                          <th scope="col">Image</th>
-                                          <th colspan="2" scope="col">Action</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
 
 <?php
-        error_reporting(1);
-        include ('connection.php');
-        $data = "SELECT * FROM slider ORDER by id DESC";
-        $val = $con->query($data);
-        $i = 1;
-        if ($val->num_rows > 0) {
-        while (list($id, $title, $description, $image) = mysqli_fetch_array($val)) {
-            echo "<tr>
-                <th scope='row'>".$i++."</th>
-                <td> $title </td>
-                <td> $description </td>
-                <td> <img src='./slider/$image' height='100' width='100' style='border-radius: 20px;' /> </td>
-                <td> <a href='slider-edit.php?id=$id'><button type='button' class='btn btn-warning'> Edit </button></a> </td>
-                <td> <a href='slider-delete.php?id=$id&image=$image' onclick=\"return confirm('Are you sure you want to delete this slider?');\"><button type='button' class='btn btn-danger'> Delete </button></a> </td>
-                </tr>";
-            }
-        } else {
-            echo "<tr><td colspan='6' style='text-align:center;'><b> No data available! </b></td></tr>";
-        }
-    ?>
+    error_reporting(1);
+    include('connection.php');
+    if(isset($_POST['submit'])) {
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $image = $_FILES["image"]["name"];
 
-                                    </tbody>
-                                </table>
+        $query = mysqli_query($con, "insert into drinks(name, description, price, img) value('$name', '$description', '$price', '$image')");
+        if($query) {
+            move_uploaded_file($_FILES["image"]["tmp_name"],"drink/".$image);
+            echo "<script>alert('Drink product has been added.');</script>";
+            echo "<script>window.location.href = 'drink.php'</script>";
+        } else {
+            echo "<script>alert(Someting Went Wrong. Please check again!);</script>";
+        }
+    }
+?>
+
+                            <div class="card-body card-block">
+                                <form method="POST" enctype="multipart/form-data" class="form-horizontal">
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Drink Name</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="name" placeholder="Drink Name" class="form-control" required></div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Drink Price</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="price" placeholder="Drink Price" class="form-control" required></div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Drink Description</label></div>
+                                        <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="5" placeholder="Drink Descriptions" class="form-control" required></textarea></div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="file-input" class=" form-control-label">Upload Image</label></div>
+                                        <div class="col-12 col-md-9"><input type="file" id="file-input" name="image" class="form-control-file" required></div>
+                                    </div>
+                            <div class="row">
+                                <button type="submit" name="submit" style="margin-left:35px;" class="mt-5 mb-3 btn btn-outline-success"><i class="fa fa-magic"></i>&nbsp; Success</button>
+                            </div>
+                                </form>
                             </div>
                         </div>
                     </div>
