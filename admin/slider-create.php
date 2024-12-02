@@ -79,10 +79,10 @@
                     <li class="menu-title">UI elements</li><!-- /.menu-title -->
 
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-house"></i>slider</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa-solid fa-circle-plus"></i><a href="tables-basic.html">Basic Table</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
+                            <li><i class="fa fa-table"></i><a href="slider.php">Slider List</a></li>
+                            <li><i class="fa-solid fa-circle-plus"></i><a href="slider-create.php">Slider Create</a></li>
                         </ul>
 
                     <li class="menu-title">Extras</li><!-- /.menu-title -->
@@ -206,9 +206,86 @@
             </div>
         </header>
         <!-- /#header -->
-        <!-- Content -->
-        
-        <!-- /.content -->
+
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>Dashboard</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="page-header float-right">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="base.php">Dashboard</a></li>
+                                    <li><a href="slider.php">Slider</a></li>
+                                    <li class="active">Slider Create</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+                <div class="col-lg-12">
+                        <div class="card">
+                            <div class="text-center card-header">
+                                <strong>Slider</strong> Create
+                            </div>
+<?php
+    error_reporting(1);
+    include('connection.php');
+    if(isset($_POST['submit'])) {
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $image = $_FILES["image"]["name"];
+
+        $query = mysqli_query($con, "insert into slider(title, description, image) value('$title', '$description', '$image')");
+        if($query) {
+            move_uploaded_file($_FILES["image"]["tmp_name"],"slider/".$image);
+            echo "<script>alert('Slider has been added.');</script>";
+            echo "<script>window.location.href = 'slider.php'</script>";
+        } else {
+            echo "<script>alert('Something Went Wrong. Please check again!');</script>";
+        }
+    }
+?>
+                            <div class="card-body card-block">
+                                <form method="POST" enctype="multipart/form-data" class="form-horizontal">
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Slider Title</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="title" placeholder="Slider Title" class="form-control" required></div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Slider Description</label></div>
+                                        <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="5" placeholder="Slider Descriptions" class="form-control" required></textarea></div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="file-input" class=" form-control-label">Upload Image</label></div>
+                                        <div class="col-12 col-md-9"><input type="file" id="file-input" name="image" class="form-control-file" required></div>
+                                    </div>
+                            <div class="row">
+                                <button type="submit" name="submit" style="margin-left:35px;" class="mt-5 mb-3 btn btn-outline-success"><i class="fa fa-magic"></i>&nbsp; Success</button>
+                            </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="clearfix"></div>
         <!-- Footer -->
         <footer class="site-footer">
