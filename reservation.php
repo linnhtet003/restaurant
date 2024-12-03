@@ -99,6 +99,8 @@
         			$time = $_POST['time'];
         			$person = $_POST['person'];
 
+					$date = date('Y-m-d', strtotime($date));
+
         			$query = mysqli_query($con, "insert into reservation(name, email, phone, date, time, person) value('$name', '$email', '$phone', '$date', '$time', '$person')");
         			if($query) {
             			echo "<p style='color:green;text-align:center;'> $name Your reservation has been added.</p>";
@@ -117,19 +119,19 @@
 									<h3>Book a table</h3>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input id="input_date" class="datepicker picker__input form-control" name="date" type="text" value="" equired data-error="Please enter Date">
+											<input id="input_date" class="datepicker picker__input form-control" name="date" type="text" value="" equired placeholder="Please enter Date">
 											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input id="input_time" class="time form-control picker__input"name="time" required data-error="Please enter time">
+											<input id="input_time" class="time form-control picker__input" name="time" required placeholder="Please enter time">
 											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<select class="custom-select d-block form-control" name="person" id="person" required data-error="Please select Person">
+											<select class="custom-select d-block form-control" name="person" id="person" required placeholder="Please select Person">
 											  <option disabled selected>Select Person*</option>
 											  <option value="1">1</option>
 											  <option value="2">2</option>

@@ -101,7 +101,7 @@
                         </ul>
                     </li>
 
-                    <li class="menu-item-has-children active dropdown">
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-utensils"></i>Dinner</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="dinner.php">Dinner List</a></li>
@@ -109,7 +109,7 @@
                         </ul>
                     </li>
 
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children active dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-users-gear"></i>Stuff</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="stuff.php">Stuff List</a></li>
@@ -267,8 +267,8 @@
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="base.php">Dashboard</a></li>
-                                    <li><a href="dinner.php">Dinner</a></li>
-                                    <li class="active">Dinner Edit</li>
+                                    <li><a href="stuff.php">Stuff</a></li>
+                                    <li class="active">Stuff Create</li>
                                 </ol>
                             </div>
                         </div>
@@ -283,42 +283,45 @@
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="text-center card-header">
-                                <strong>Dinner</strong> Edit
+                                <strong>Stuff</strong> Create
                             </div>
+
 <?php
-     error_reporting(1);
-     include('connection.php');
-     $id = $_GET['id'];
-     $val = $con->query("Select * from dinner where id=$id");
-     $data = mysqli_fetch_array($val);
+    error_reporting(1);
+    include('connection.php');
+    if(isset($_POST['submit'])) {
+        $name = $_POST['name'];
+        $position = $_POST['position'];
+        $image = $_FILES["image"]["name"];
 
-     if(isset($_POST['submit'])) {
-        $new_name = $_POST['name'];
-        $new_description = $_POST['description'];
-        $new_price = $_POST['price'];
-
-        $con->query("update dinner set name='$new_name', description='$new_description', price='$new_price' where id=$id ");
-        echo "<script>window.location.href = 'dinner.php'</script>";
-     }
+        $query = mysqli_query($con, "insert into stuff(name, position, image) value('$name', '$position', '$image')");
+        if($query) {
+            move_uploaded_file($_FILES["image"]["tmp_name"],"stuff/".$image);
+            echo "<script>alert('Stuff has been added.');</script>";
+            echo "<script>window.location.href = 'stuff.php'</script>";
+        } else {
+            echo "<script>alert('Something Went Wrong. Please check again!');</script>";
+        }
+    }
 ?>
+
                             <div class="card-body card-block">
                                 <form method="POST" enctype="multipart/form-data" class="form-horizontal">
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Dinner Name</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="name" placeholder="Dinner Name" value="<?php echo $data['name'] ?>" class="form-control" required></div>
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Stuff Name</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="name" placeholder="Stuff Name" class="form-control" required></div>
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Dinner Price</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="price" placeholder="Dinner Price" value="<?php echo $data['price'] ?>" class="form-control" required></div>
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Stuff Position</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="position" placeholder="Stuff Position" class="form-control" required></div>
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Dinner Description</label></div>
-                                        <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="5" placeholder="Dinner Descriptions" class="form-control" required><?php echo $data['description'] ?></textarea></div>
+                                        <div class="col col-md-3"><label for="file-input" class=" form-control-label">Upload Image</label></div>
+                                        <div class="col-12 col-md-9"><input type="file" id="file-input" name="image" class="form-control-file" required></div>
                                     </div>
-
                             <div class="row">
                                 <button type="submit" name="submit" style="margin-left:35px;" class="mt-5 mb-3 btn btn-outline-success"><i class="fa fa-magic"></i>&nbsp; Success</button>
                             </div>
