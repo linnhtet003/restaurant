@@ -1,0 +1,4 @@
+db_name => restaurant
+
+admin_login => username => admin@gmail.com
+               password => superuser
