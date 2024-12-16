@@ -73,12 +73,12 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li class="active">
                         <a href="base.php"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">UI elements</li><!-- /.menu-title -->
 
-                    <li class="menu-item-has-children active dropdown">
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-repeat"></i>Slider</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="slider.php">Slider List</a></li>
@@ -166,76 +166,280 @@
         </header>
         <!-- /#header -->
 
-        <div class="breadcrumbs">
-            <div class="breadcrumbs-inner">
-                <div class="row m-0">
-                    <div class="col-sm-4">
-                        <div class="page-header float-left">
-                            <div class="page-title">
-                                <h1>Dashboard</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="page-header float-right">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li><a href="base.php">Dashboard</a></li>
-                                    <li><a href="slider.php">Slider</a></li>
-                                    <li class="active">Slider Edit</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="content">
+            <!-- Animated -->
             <div class="animated fadeIn">
+                <!-- Widgets  -->
                 <div class="row">
-                <div class="col-lg-12">
-                        <div class="card">
-                            <div class="text-center card-header">
-                                <strong>Slider</strong> Edit
-                            </div>
-<?php
-     error_reporting(1);
-     include('connection.php');
-     $id = $_GET['id'];
-     $val = $con->query("Select * from slider where id=$id");
-     $data = mysqli_fetch_array($val);
 
-     if(isset($_POST['submit'])) {
-        $new_title = $_POST['title'];
-        $new_description = $_POST['description'];
-
-        $con->query("update slider set title='$new_title', description='$new_description' where id=$id ");
-        echo "<script>window.location.href = 'slider.php'</script>";
-     }
-?>
-                            <div class="card-body card-block">
-                                <form method="POST" enctype="multipart/form-data" class="form-horizontal">
-
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label"> Slider Title</label></div>
-                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="title" placeholder="Slider Title" value="<?php echo $data['title'] ?>" class="form-control" required></div>
+                    <div class="col-sm-12 mb-4">
+                        <div class="card-group">
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                    <i class="fa-solid fa-repeat"></i>
                                     </div>
 
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Slider Description</label></div>
-                                        <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="5" placeholder="Slider Descriptions" class="form-control" required><?php echo $data['description'] ?></textarea></div>
+                                    <div class="h4 mb-0">
+                                <?php
+                                    error_reporting(1);
+                                    include('connection.php');
+
+                                    $data = "SELECT COUNT(*) as slider_rows FROM slider";
+                                    $result = $con->query($data);
+
+                                    $sliderrows = 0;
+                                    if ($result) {
+                                        $row = $result->fetch_assoc();
+                                        $sliderrows = $row['slider_rows'];
+                                    }
+
+                                ?>
+                                        <span class="count"><?php echo $sliderrows; ?></span>
                                     </div>
 
-                            <div class="row">
-                                <button type="submit" name="submit" style="margin-left:35px;" class="mt-5 mb-3 btn btn-outline-success"><i class="fa fa-magic"></i>&nbsp; Success</button>
+                                    <small class="text-muted text-uppercase font-weight-bold">Slider</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
+                                </div>
                             </div>
-                                </form>
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                        <i class="fa-solid fa-martini-glass-citrus"></i>
+                                    </div>
+                                    <div class="h4 mb-0">
+                                <?php
+                                    error_reporting(1);
+                                    include('connection.php');
+
+                                    $data = "SELECT COUNT(*) as drink_rows FROM drinks";
+                                    $result = $con->query($data);
+
+                                    $drinkrows = 0;
+                                    if ($result) {
+                                        $row = $result->fetch_assoc();
+                                        $drinkrows = $row['drink_rows'];
+                                    }
+
+                                ?>
+                                        <span class="count"><?php echo $drinkrows; ?></span>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold">Drinks</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2" style="width: 40%; height: 5px;"></div>
+                                </div>
+                            </div>
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                        <i class="menu-icon fa-solid fa-burger"></i>
+                                    </div>
+                                    <div class="h4 mb-0">
+
+                                <?php
+                                    error_reporting(1);
+                                    include('connection.php');
+
+                                    $data = "SELECT COUNT(*) as lunch_rows FROM lunch";
+                                    $result = $con->query($data);
+
+                                    $lunchrows = 0;
+                                    if ($result) {
+                                        $row = $result->fetch_assoc();
+                                        $lunchrows = $row['lunch_rows'];
+                                    }
+
+                                ?>
+
+                                        <span class="count"><?php echo $lunchrows; ?></span>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold">Lunch</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-3" style="width: 40%; height: 5px;"></div>
+                                </div>
+                            </div>
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                        <i class="menu-icon fa-solid fa-utensils"></i>
+                                    </div>
+                                    <div class="h4 mb-0">
+
+                                <?php
+                                    error_reporting(1);
+                                    include('connection.php');
+
+                                    $data = "SELECT COUNT(*) as dinner_rows FROM dinner";
+                                    $result = $con->query($data);
+
+                                    $dinnerrows = 0;
+                                    if ($result) {
+                                        $row = $result->fetch_assoc();
+                                        $dinnerrows = $row['dinner_rows'];
+                                    }
+
+                                ?>
+
+                                        <span class="count"><?php echo $dinnerrows; ?></span>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold">Dinner</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-4" style="width: 40%; height: 5px;"></div>
+                                </div>
+                            </div>
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                        <i class="menu-icon fa-regular fa-address-book"></i>
+                                    </div>
+                                    <div class="h4 mb-0">
+
+                                <?php
+                                    error_reporting(1);
+                                    include('connection.php');
+
+                                    $data = "SELECT COUNT(*) as reservation_rows FROM reservation";
+                                    $result = $con->query($data);
+
+                                    $reservationrows = 0;
+                                    if ($result) {
+                                        $row = $result->fetch_assoc();
+                                        $reservationrows = $row['reservation_rows'];
+                                    }
+
+                                ?>
+
+                                        <span class="count"><?php echo $reservationrows; ?></span>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold">Reservations</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-5" style="width: 40%; height: 5px;"></div>
+                                </div>
+                            </div>
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                        <i class="menu-icon fa-regular fa-comments"></i>
+                                    </div>
+                                    <div class="h4 mb-0">
+
+                                <?php
+                                    error_reporting(1);
+                                    include('connection.php');
+
+                                    $data = "SELECT COUNT(*) as reviews_rows FROM contact";
+                                    $result = $con->query($data);
+
+                                    $reviewsrows = 0;
+                                    if ($result) {
+                                        $row = $result->fetch_assoc();
+                                        $reviewsrows = $row['reviews_rows'];
+                                    }
+
+                                ?>
+
+                                        <span class="count"><?php echo $reviewsrows; ?></span>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold">Reviews</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Reservation List</strong>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Person</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+    <?php
+        error_reporting(1);
+        include ('connection.php');
+        $data = "SELECT * FROM reservation ORDER by id DESC LIMIT 5";
+        $val = $con->query($data);
+        $i = 1;
+        if ($val->num_rows > 0) {
+        while (list($id, $name, $email,$phone, $date, $time, $person) = mysqli_fetch_array($val)) {
+            echo "<tr>
+                <td>".$i++."</td>
+                <td> $name </td>
+                <td> $email </td>
+                <td> $phone </td>
+                <td> $date </td>
+                <td> $time </td>
+                <td> $person </td>
+                </tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6' style='text-align:center;'><b> No data available! </b></td></tr>";
+        }
+    ?>
+
+                                    </tbody>
+                                </table>
+                            </div> <!-- /.table-stats -->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Review List</strong>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">About</th>
+                                            <th scope="col">Review</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+    <?php
+        error_reporting(1);
+        include ('connection.php');
+        $data = "SELECT * FROM contact ORDER by id DESC LIMIT 5";
+        $val = $con->query($data);
+        $i = 1;
+        if ($val->num_rows > 0) {
+        while (list($id, $name, $email,$about, $review) = mysqli_fetch_array($val)) {
+            echo "<tr>
+                <td scope='row'>".$i++."</td>
+                <td> $name </td>
+                <td> $email </td>
+                <td> $about </td>
+                <td> $review </td>
+                </tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6' style='text-align:center;'><b> No data available! </b></td></tr>";
+        }
+    ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- .row -->
             </div>
+            <!-- .animated -->
         </div>
 
         <div class="clearfix"></div>
